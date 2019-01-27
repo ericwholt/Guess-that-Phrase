@@ -19,21 +19,6 @@ class Phrase {
 
         for (let letter of this.phrase) {
             const li = document.createElement('li');
-            // const divCon = document.createElement('div');
-            // const divPine = document.createElement('div');
-            // const divLeafLeft = document.createElement('div');
-            // const divLeafMiddle = document.createElement('div');
-            // const divleafRight = document.createElement('div');
-
-            // divCon.id = 'container';
-            // divPine.className = "pineapple";
-            // divLeafLeft.className = "leafleft";
-            // divLeafMiddle.className = "leafmiddle";
-            // divleafRight.className = "leafright";
-            // divPine.appendChild(divLeafLeft);
-            // divPine.appendChild(divLeafMiddle);
-            // divPine.appendChild(divleafRight);
-            // divCon.appendChild(divPine);
 
             if (letter !== ' ') {
                 // li.appendChild(divCon);
@@ -57,12 +42,7 @@ class Phrase {
      * @return {boolean} Return true if phrase contains the letter or false if it does not contain letter
      */
     checkLetter(letter) {
-
-        if (this.phrase.includes(letter)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (this.phrase.includes(letter)) ? true : false;
     }
 
     /**
@@ -81,19 +61,24 @@ class Phrase {
         }
     }
 
+    /**
+     * Get all the unique letters in the phrase
+     */
     get uniqueLettersInPhrase() {
         let uniqueLetters = "";
-        for (let i = 0; i < this.phrase.length; i += 1) {
 
-            if (uniqueLetters.indexOf(this.phrase.charAt(i)) === -1) {
-                if (!(this.phrase[i] === ' ')) {
-                    uniqueLetters += this.phrase[i];
-                }
+        for (let letter of this.phrase) {
+            if (uniqueLetters.indexOf(this.phrase) === -1 && letter !== ' ') {
+                uniqueLetters += letter;
             }
         }
+
         return uniqueLetters;
     }
 
+    /**
+     * Get all the unique letters that are hidden
+     */
     get uniqueHiddenLettersInPhrase() {
         const letterElements = document.getElementsByClassName('letter');
         let uniqueHiddenLetters = '';

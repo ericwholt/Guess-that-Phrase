@@ -7,9 +7,25 @@ class Game {
      */
     constructor() {
         this.missed = 0; // Number of time player's selection was wrong
-        this.phrases = ['Aye captain', 'Im ready', 'Tartar sauce', 'Sweet mother of Pearl', 'Meow', 'Is mayonnaise an instrument', 'my leg my leg']; // Phrases that can be used for the game
+        this.phrases = [ // Phrases that can be used for the game
+            {
+                phrase: 'Aye captain'
+            },
+            {
+                phrase: 'Tartar sauce'
+            },
+            {
+                phrase: 'Sweet mother of Pearl'
+            },
+            {
+                phrase: 'Is mayonnaise an instrument'
+            },
+            {
+                phrase: 'my leg my leg'
+            }
+        ];
         this.phrasesPicked = []; // The phrase used last game or if first game it is set to length.
-        this.activePhrase = this.getRandomPhrase(); //
+        this.activePhrase = null; //
     }
 
     /**
@@ -24,7 +40,7 @@ class Game {
     }
 
     /**
-     * Get a random phrase for the phrases array
+     * Get a random phrase object from the phrases array
      * @return {object} Phrase - Returns a new Phrase object with a random phrase selected
      */
     getRandomPhrase() {
@@ -38,9 +54,8 @@ class Game {
         while (this.phrasesPicked.includes(randomIndex)) {
             randomIndex = Math.floor(Math.random() * this.phrases.length);
         }
-
         this.phrasesPicked.push(randomIndex); // Track what phrase was randomly picked. 
-        return new Phrase(this.phrases[randomIndex]);
+        return new Phrase(this.phrases[randomIndex].phrase);
     }
 
     /**
@@ -106,26 +121,17 @@ class Game {
             this.gameOver('lose');
         } else {
             const currentLifesImage = tries[tries.length - this.missed].firstElementChild;
-            animateBubble(currentLifesImage);
+            animateBubble(currentLifesImage); // animates popping bubble and leaves blank image
         }
     }
 
     /**
      * Check if the letter guessed was the last one left to guess.
+     * Get the number of hidden letters on board. If the length is not 0 return false. Gameboard still has hidden letters
      * @return {boolean} gameWon - Did we win either true or false
      */
     checkForWin() {
-        let gameWon = true;
-        const letterElements = document.getElementsByClassName('letter');
-
-        //loop through our phrase letter elements
-        for (let letterElement of letterElements) {
-            // check if any of the elements are hidden and if one is then immediately end loop
-            if (letterElement.classList.contains('hide')) {
-                return gameWon = false;
-            }
-        }
-        return gameWon;
+        return (game.activePhrase.uniqueHiddenLettersInPhrase.length) ? false : true; // If length is 0 all the letters have been found.
     }
 
     /**
@@ -144,7 +150,7 @@ class Game {
         gameOverMessageElement.textContent = eval(outcome + 'Message'); // Set gameOver text dynamically based on outcome provided.
         gameOverButton.textContent = eval(outcome + 'ButtonText'); // Set gameOverButton text dynamically based on outcome provided.
         overlayDiv.className = outcome; //Set class of Overlay Div to the outcome
-        document.getElementById(`${outcome}-image`).style.display = 'flex';
+        document.getElementById(`${outcome}-image`).style.display = 'flex'; // Show the image
         overlayDiv.style.display = 'flex'; //show the start game overlay
     }
 
@@ -171,11 +177,11 @@ class Game {
         // add try images back to gameboard
         for (let i = 0; i < tries.length; i += 1) {
             let randomDelay = Math.floor(Math.random() * 250);
-            // tries[i].firstElementChild.style.animationDelay = `${randomDelay}ms`;
             tries[i].firstElementChild.style.backgroundPosition = "0px 0px";
         }
-        document.getElementById('win-image').style.display = 'none';
-        document.getElementById('lose-image').style.display = 'none';
+        document.getElementById('win-image').style.display = 'none'; // Hide winning image we don't need it right now.
+        document.getElementById('lose-image').style.display = 'none'; // Hide losing image we don't need it right now.
+        document.getElementById('start-image').style.display = 'none'; // Hide starting image we don't need it right now.
     }
 
 }
