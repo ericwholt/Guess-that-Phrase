@@ -150,7 +150,7 @@ class Game {
         gameOverMessageElement.textContent = eval(outcome + 'Message'); // Set gameOver text dynamically based on outcome provided.
         gameOverButton.textContent = eval(outcome + 'ButtonText'); // Set gameOverButton text dynamically based on outcome provided.
         overlayDiv.className = outcome; //Set class of Overlay Div to the outcome
-        document.getElementById(`${outcome}-image`).style.display = 'flex'; // Show the image
+        document.getElementById(`${outcome}-image`).style.display = 'block'; // Show the image
         overlayDiv.style.display = 'flex'; //show the start game overlay
     }
 
