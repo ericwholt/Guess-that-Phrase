@@ -95,14 +95,14 @@ class Game {
             if (!button.disabled) {
                 if (this.activePhrase.checkLetter(letter)) {
                     // If the phrase does include the guessed letter, add the chosen CSS class to the selected letter's keyboard button, show the matched letter/s and check if win condition has been met.
-                    button.className = 'chosen';
+                    button.className = 'animated bounce chosen';
                     this.activePhrase.showMatchedLetter(letter);
                     if (this.checkForWin()) {
                         this.gameOver('win');
                     }
                 } else {
                     // If the phrase does not include the guessed letter, add the wrong CSS class to the selected letter's keyboard button and call the removeLife() method.
-                    button.className = 'wrong';
+                    button.className = 'wrong animated shake';
                     this.RemoveLife();
                 }
                 button.disabled = true;
