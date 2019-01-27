@@ -184,8 +184,8 @@ button {
 }
 
 #image {
-  height: 150px;
-  width: 150px;
+  height: 73px;
+  width: 73px;
   background: url('../images/bubbleAnimation.png') 0px 0px;
 }
 
@@ -252,7 +252,7 @@ button {
   margin: auto;
   margin-bottom: 0%;
   margin-top: 0%;
-  width: 70%;
+  width: 50%;
   height: 40%;
   display: 'flex';
 }

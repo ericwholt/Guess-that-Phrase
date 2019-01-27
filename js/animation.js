@@ -1,7 +1,7 @@
 function animateBubble(element) {
-    let position = 150; //start position of next section of bubble animation
+    let position = 73; //start position of next section of bubble animation
     const interval = 45; //speed of the animation
-    const positionOffset = 150; //diff as a variable for position offset
+    const positionOffset = 73; //diff as a variable for position offset
 
     let loop = setInterval(() => {
         element.style.backgroundPosition = `-${position}px 0px`; //set varible position
