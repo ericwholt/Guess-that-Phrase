@@ -14,4 +14,4 @@ Life Heart changed to animated bubbles that float.
 
 Added gifs to win and lose overlay
 
-
+CSS changes for bubble float animation and image size
