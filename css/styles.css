@@ -1,5 +1,5 @@
 /* Main styles */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300');
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
 
 /* Variables */
 
@@ -7,8 +7,8 @@
   --color-win: #78CF82;
   --color-lose: #D94545;
   --color-start: #5b85b7;
-  --color-neutral: #445069;
-  --color-neutral-light: #D2D2D2;
+  --color-neutral: #4a3ef3;
+  --color-neutral-light: #5f84ff;
   --color-keys: #37474F;
   --color-keys-light: #E5E5E5;
   --font-size-large: 60px;
@@ -20,7 +20,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Permanent Marker', sans-serif;
 }
 
 body {
@@ -28,6 +28,11 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  background-color: #37474F;
+  background: url('../images/bg.png') 0px 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 li,
@@ -42,6 +47,7 @@ h2 {
   text-transform: uppercase;
   font-size: var(--font-size-large);
   margin: 0;
+  margin-top: 00px;
 }
 
 h1 {
@@ -95,13 +101,13 @@ button {
 /* Phrase */
 
 .letter {
-  font-size: var(--font-size-medium);
+  font-size: 30px;
   height: 65px;
   width: 65px;
-  padding: 20px 1px 0 1px;
+  padding: 10px 1px 0 1px;
   margin-right: 2px;
   color: transparent;
-  background: var(--color-neutral-light);
+  background: var(--color-neutral);
   border-radius: 5px;
 }
 
@@ -113,11 +119,11 @@ button {
 
 .show {
   color: #fff;
-  background-color: #4ac0d5;
-  font-size: 20px;
+  background-color: var(--color-neutral-light);
+  font-size: 30px;
   height: 65px;
   width: 65px;
-  padding: 20px 1px 0 1px;
+  padding: 10px 1px 0 1px;
   margin-right: 2px;
   border-radius: 5px;
   -webkit-animation-duration: .5s;
@@ -133,14 +139,14 @@ button {
 }
 
 .chosen {
-  background: #3a3f58;
+  background: #9abd01;
   border-radius: 5px;
   font-size: var(--font-size-medium);
   color: #FFFFFF;
 }
 
 .wrong {
-  background: #f7a964;
+  background: #f39f04;
   color: #FFFFFF;
 }
 
@@ -161,6 +167,52 @@ button {
   border-right: solid 3px rgba(0, 0, 0, 0);
 }
 
+/* ScoreBoard */
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+
+  50% {
+    transform: translatey(-20px);
+  }
+
+  100% {
+    transform: translatey(0px);
+  }
+}
+
+#image {
+  height: 150px;
+  width: 150px;
+  background: url('../images/bubbleAnimation.png') 0px 0px;
+}
+
+.bubble1 {
+  animation-delay: -10s;
+  animation: float 4s ease-in-out infinite;
+}
+
+.bubble2 {
+  animation-delay: -5s;
+  animation: float 6s ease-in-out infinite;
+}
+
+.bubble3 {
+  animation-delay: -1s;
+  animation: float 3s ease-in-out infinite;
+}
+
+.bubble4 {
+  animation-delay: 200s;
+  animation: float 7s ease-in-out infinite;
+}
+
+.bubble5 {
+  animation-delay: 50s;
+  animation: float 5s ease-in-out infinite;
+}
 
 /* Overlay */
 
@@ -168,17 +220,41 @@ button {
   display: flex;
   flex-direction: column;
   position: fixed;
-  color: #FFFFFF;
+  color: #fff;
   justify-content: center;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   border-radius: 5px;
+  z-index: 1;
+}
+
+#win-image {
+  margin-left: 25%;
+  margin-top: 0px;
+  width: 50%;
+  border: 3px solid #000000;
+  display: none;
+}
+
+#lose-image {
+  margin-left: 25%;
+  margin-top: 0px;
+  width: 50%;
+  border: 3px solid #000000;
+  display: none;
+}
+
+#start-image {
+  margin-left: 25%;
+  margin-top: 0px;
+  width: 50%;
+  display: 'flex';
 }
 
 .title {
-  color: #FFF;
+  color: rgb(131, 76, 250);
 }
 
 .start {
@@ -203,4 +279,8 @@ button {
 
 .lose a {
   color: var(--color-lose);
+}
+
+#game-over-message {
+  font-size: 60px;
 }

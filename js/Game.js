@@ -7,8 +7,8 @@ class Game {
      */
     constructor() {
         this.missed = 0; // Number of time player's selection was wrong
-        this.phrases = ['Aye captain', 'Im ready', 'Tartar sauce', 'Sweet mother of Pearl', 'Meow', 'Is mayonnaise an instrument']; // Phrases that can be used for the game
-        this.lastPhraseIndex = this.phrases.length; // The phrase used last game or if first game it is set to length.
+        this.phrases = ['Aye captain', 'Im ready', 'Tartar sauce', 'Sweet mother of Pearl', 'Meow', 'Is mayonnaise an instrument', 'my leg my leg']; // Phrases that can be used for the game
+        this.phrasesPicked = []; // The phrase used last game or if first game it is set to length.
         this.activePhrase = this.getRandomPhrase(); //
     }
 
@@ -32,11 +32,14 @@ class Game {
 
         // When we start a new game make sure it isn't the same as the last one we did.
         // if first game this will never be true.
-        while (randomIndex === this.lastPhraseIndex) {
+        if (this.phrasesPicked.length === this.phrases.length) {
+            this.phrasesPicked = [];
+        }
+        while (this.phrasesPicked.includes(randomIndex)) {
             randomIndex = Math.floor(Math.random() * this.phrases.length);
         }
 
-        this.lastPhraseIndex = randomIndex; // Track what phrase was randomly picked. 
+        this.phrasesPicked.push(randomIndex); // Track what phrase was randomly picked. 
         return new Phrase(this.phrases[randomIndex]);
     }
 
@@ -102,8 +105,8 @@ class Game {
         if (this.missed === 5) {
             this.gameOver('lose');
         } else {
-            const currentLifesImage = tries[tries.length - this.missed].firstChild;
-            currentLifesImage.setAttribute('src', 'images/lostHeart.png');
+            const currentLifesImage = tries[tries.length - this.missed].firstElementChild;
+            animateBubble(currentLifesImage);
         }
     }
 
@@ -133,14 +136,15 @@ class Game {
         const overlayDiv = document.getElementById('overlay');
         const gameOverMessageElement = document.getElementById('game-over-message')
         const gameOverButton = document.getElementById('btn__reset');
-        const winMessage = 'Great job! You guess the phrase.';
+        const winMessage = `You guessed "${this.activePhrase.phrase}" Great job!`;
         const winButtonText = 'Play Again';
-        const loseMessage = 'Better luck next time!';
+        const loseMessage = `You made 5 incorrect guesses. You had ${game.activePhrase.uniqueHiddenLettersInPhrase.length} letters left to find.`;
         const loseButtonText = 'Try Again';
 
         gameOverMessageElement.textContent = eval(outcome + 'Message'); // Set gameOver text dynamically based on outcome provided.
         gameOverButton.textContent = eval(outcome + 'ButtonText'); // Set gameOverButton text dynamically based on outcome provided.
         overlayDiv.className = outcome; //Set class of Overlay Div to the outcome
+        document.getElementById(`${outcome}-image`).style.display = 'flex';
         overlayDiv.style.display = 'flex'; //show the start game overlay
     }
 
@@ -166,7 +170,12 @@ class Game {
 
         // add try images back to gameboard
         for (let i = 0; i < tries.length; i += 1) {
-            tries[i].firstChild.setAttribute('src', 'images/liveHeart.png');
+            let randomDelay = Math.floor(Math.random() * 250);
+            // tries[i].firstElementChild.style.animationDelay = `${randomDelay}ms`;
+            tries[i].firstElementChild.style.backgroundPosition = "0px 0px";
         }
+        document.getElementById('win-image').style.display = 'none';
+        document.getElementById('lose-image').style.display = 'none';
     }
+
 }
