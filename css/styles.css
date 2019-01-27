@@ -4,8 +4,8 @@
 /* Variables */
 
 :root {
-  --color-win: #78CF82;
-  --color-lose: #D94545;
+  --color-win: #fff688;
+  --color-lose: #f59cae;
   --color-start: #5b85b7;
   --color-neutral: #3694d0;
   --color-neutral-light: #0f71b5;
@@ -280,7 +280,7 @@ button {
 }
 
 .lose {
-  background-color: #f5785f;
+  background-color: var(--color-lose);
 }
 
 .lose a {
@@ -288,5 +288,6 @@ button {
 }
 
 #game-over-message {
+  color: #000;
   font-size: 60px;
 }
