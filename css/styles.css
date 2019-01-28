@@ -42,6 +42,21 @@ ul {
   display: inline-block;
 }
 
+li {
+  /* iOS Safari */
+  -webkit-touch-callout: none;
+  /* Chrome/Safari/Opera */
+  -webkit-user-select: none;
+  /* Konqueror */
+  -khtml-user-select: none;
+  /* Firefox */
+  -moz-user-select: none;
+  /* Internet Explorer/Edge */
+  -ms-user-select: none;
+  /* Non-prefixed version, currently supported by any browser but < IE9 */
+  user-select: none;
+}
+
 h2 {
   margin: 0;
   text-transform: uppercase;
